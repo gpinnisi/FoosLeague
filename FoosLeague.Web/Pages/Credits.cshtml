@@ -9,19 +9,3 @@
     
     Enjoy!
 </div>
-
-@section Scripts {
-    <script>
-        $(document).ready(function () {
-            initTable();
-        });
-
-        function initTable() {
-            $('#rankingTable').DataTable({
-                lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, 'All']],
-                paging: true,
-                filter: true
-            });
-        }
-    </script>
-}

@@ -14,7 +14,7 @@ public class IndexModel(ReadContext context) : PageModel
 
     public async Task<IActionResult> OnGetAsync()
     {
-        Ranking = await _context.Players.OrderBy(x => (decimal)(x.ScoreForward + x.ScoreDefender) / 2).Select(x => new RankingItemViewModel
+        Ranking = await _context.Players.OrderByDescending(x => (decimal)(x.ScoreForward + x.ScoreDefender) / 2).Select(x => new RankingItemViewModel
         {
             Name = x.Name,
             Surname = x.Surname,
