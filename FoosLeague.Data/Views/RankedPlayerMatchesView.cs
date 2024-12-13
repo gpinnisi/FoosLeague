@@ -1,10 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using FoosLeague.Data.Entities;
 
 namespace FoosLeague.Data.Views;
-internal class RankedPlayerMatchesView
+
+[Table("vwRankedPlayerMatches")]
+public class RankedPlayerMatchesView
 {
+    public Guid MatchId { get; set; }
+    public Guid PlayerId { get; set; }  
+    public Role Role { get; set; }
+    public bool IsWinner { get; set; }
+
+    public Match? Match { get; set; }
+    public Player? Player { get; set; }
 }
