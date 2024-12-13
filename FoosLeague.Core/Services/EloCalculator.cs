@@ -32,7 +32,7 @@ public class EloCalculator
 
     private static int CalculateSinglePlayerElo(int PlayerElo, int TeamEloResult, int TeamEloRating)
     {
-        return PlayerElo * TeamEloResult / TeamEloRating;
+        return TeamEloRating != 0 ? PlayerElo * TeamEloResult / TeamEloRating : TeamEloResult / 2;
     }
 
     public static List<PlayerMatches> CalculatePlayerEloRanking(Team team1, Team team2, Match match)
