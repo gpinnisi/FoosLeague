@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FoosLeague.Data.Entities;
+
 public class PlayerMatches
 {
     public Guid Id { get; set; } = Guid.NewGuid();

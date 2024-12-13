@@ -2,7 +2,7 @@
 
 namespace FoosLeague.Web.Service;
 
-public class EloCalculator
+public static class EloCalculator 
 {
     private static readonly int K = 200;
     // Function to calculate the Probability
