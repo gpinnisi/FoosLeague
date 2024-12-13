@@ -1,20 +1,28 @@
+using FoosLeague.Data.Contexts;
+using FoosLeague.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
-namespace FoosLeague.Web.Pages
+namespace FoosLeague.Web.Pages;
+
+public class IndexModel(ReadContext context) : PageModel
 {
-    public class IndexModel : PageModel
+    private readonly ReadContext _context = context;
+
+    public List<RankingItemViewModel> Ranking { get; set; } = [];
+
+    public async Task<IActionResult> OnGetAsync()
     {
-        private readonly ILogger<IndexModel> _logger;
-
-        public IndexModel(ILogger<IndexModel> logger)
+        Ranking = await _context.Players.OrderBy(x => (decimal)(x.ScoreForward + x.ScoreDefender) / 2).Select(x => new RankingItemViewModel
         {
-            _logger = logger;
-        }
+            Name = x.Name,
+            Surname = x.Surname
+        }).ToListAsync();
 
-        public void OnGet()
-        {
+        int position = 1;
+        Ranking.ForEach(x => x.Position = position++);
 
-        }
+        return Page();
     }
 }

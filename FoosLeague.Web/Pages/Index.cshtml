@@ -4,25 +4,40 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
+<div class="card text-center">
     <table class="table table-striped table-bordered" id="rankingTable">
+        <thead>
+            <tr>
+                <th>Position</th>
+                <th>Name</th>
+                <th>Surname</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var rank in Model.Ranking)
+        {
+            <tr>
+                <td>@rank.Position</td>
+                <td>@rank.Name</td>
+                <td>@rank.Surname</td>
+            </tr>
+        }
+        </tbody>
     </table>
 </div>
 
 @section Scripts {
-    $(document).ready(function () {
-        initTable();
-    });
-
-    function initTable() {
-        const table = $('#tableList').DataTable({
-            lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, 'All']],
-            paging: true,
-            processing: true,
-            serverSide: true,
-            filter: true,
-            ordering: true,
-            order: [[1, 'asc']]
+    <script>
+        $(document).ready(function () {
+            initTable();
         });
-    }
+
+        function initTable() {
+            const table = $('#rankingTable').DataTable({
+                lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, 'All']],
+                paging: true,
+                filter: true
+            });
+        }
+    </script>
 }
