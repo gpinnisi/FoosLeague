@@ -1,0 +1,27 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="card text-center p-3">
+    This site was created by Deportivo Aperitivo Team:
+    
+    Enjoy!
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            initTable();
+        });
+
+        function initTable() {
+            $('#rankingTable').DataTable({
+                lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, 'All']],
+                paging: true,
+                filter: true
+            });
+        }
+    </script>
+}
