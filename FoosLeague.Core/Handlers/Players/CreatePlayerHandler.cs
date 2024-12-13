@@ -13,11 +13,12 @@ public class CreatePlayerHandler(WriteContext context) : IRequestHandler<CreateP
 
     public async Task<XResult<Guid>> Handle(CreatePlayer command, CancellationToken cancellationToken)
     {
-        if (context.Players.Any(x => x.Name == command.Name)) { return new PlayerAlreadyPresent(); }
+        if (context.Players.Any(x => x.Name == command.Name && x.Surname == command.Surname)) { return new PlayerAlreadyPresent(); }
 
         var item = new Player
         {
-            Name = command.Name
+            Name = command.Name,
+            Surname = command.Surname
         };
 
         context.Players.Add(item);

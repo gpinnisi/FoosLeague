@@ -4,7 +4,7 @@ using MediatR;
 
 namespace FoosLeague.Core.Commands.Players;
 
-public record CreatePlayer(string Name) : IRequest<XResult<Guid>>
+public record CreatePlayer(string Name, string Surname) : IRequest<XResult<Guid>>
 {
     public class PlayerAlreadyPresent() : Fail($"Player already present") { }
 }
