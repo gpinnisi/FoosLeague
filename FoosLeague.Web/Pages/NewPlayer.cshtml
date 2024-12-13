@@ -1,0 +1,30 @@
+﻿@page
+@model NewPlayerModel
+@{
+    ViewData["Title"] = "New Player";
+}
+
+<div class="card text-center p-3">
+    <form method="post">
+        <div class="row">
+            <div class="col-md-12">
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Name" class="form-control" aria-required="true" placeholder="name" />
+                    <label asp-for="Input.Name"></label>
+                    <span asp-validation-for="Input.Name" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Surname" class="form-control" aria-required="true" placeholder="surname" />
+                    <label asp-for="Input.Surname"></label>
+                    <span asp-validation-for="Input.Surname" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <button class="btn btn-primary" type="submit">Create</button>
+            </div>
+        </div>
+    </form>
+</div>
