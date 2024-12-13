@@ -10,6 +10,6 @@ public class PlayerMatches
     [Column(TypeName = "nvarchar(50)")]
     public Role Role { get; set; } = Role.Forward;
 
-    public Player Player { get; set; }
-    public Match Match { get; set; }
+    public Player? Player { get; set; }
+    public Match? Match { get; set; }
 }
