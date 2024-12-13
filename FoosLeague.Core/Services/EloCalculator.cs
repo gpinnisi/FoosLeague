@@ -4,7 +4,7 @@ namespace FoosLeague.Web.Service;
 
 public class EloCalculator
 {
-    private static readonly int K = 30;
+    private static readonly int K = 500;
     // Function to calculate the Probability
     private static double Probability(int rating1, int rating2)
     {
@@ -14,7 +14,7 @@ public class EloCalculator
 
     // Function to calculate Elo rating
     // K is a constant.
-    // outcome determines the outcome: 1 for Player A win, 0 for Player B win, 0.5 for draw.
+    // outcome determines the outcome: 1 for Player A win, 0 for Player B win.
     private static (int Team1, int Team2) CalculateTeamEloRating(double Team1EloRating, double Team2EloRating, double outcome)
     {
         // Calculate the Winning Probability of Team 2
@@ -24,10 +24,13 @@ public class EloCalculator
         var Pa = Probability((int)Team2EloRating, (int)Team1EloRating);
 
         // Update the Elo Ratings
-        Team1EloRating = Team1EloRating + K * (outcome - Pa);
-        Team2EloRating = Team2EloRating + K * ((1 - outcome) - Pb);
+        var Team1EloRatingResult = Team1EloRating + (Team1EloRating / 2) * (outcome - Pa);
+        var Team2EloRatingResult = Team2EloRating + (Team2EloRating / 2) * ((1 - outcome) - Pb);
 
-        return (Convert.ToInt32(Team1EloRating), Convert.ToInt32(Team2EloRating));
+        Team1EloRatingResult = outcome == 1 ? Team1EloRatingResult : Team1EloRatingResult * -1;
+        Team2EloRatingResult = outcome == 0 ? Team2EloRatingResult : Team2EloRatingResult * -1;
+
+        return (Convert.ToInt32(Team1EloRatingResult), Convert.ToInt32(Team2EloRatingResult));
     }
 
     private static int CalculateSinglePlayerElo(int PlayerElo, int TeamEloResult, int TeamEloRating)
