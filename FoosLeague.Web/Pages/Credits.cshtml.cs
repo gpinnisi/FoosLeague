@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FoosLeague.Web.Pages;
 
-public class IndexModel(ReadContext context) : PageModel
+public class CreditsModel(ReadContext context) : PageModel
 {
     private readonly ReadContext _context = context;
 
