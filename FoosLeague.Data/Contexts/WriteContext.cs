@@ -12,6 +12,9 @@ public class WriteContext : IdentityDbContext<IdentityUser>
     }
 
     public DbSet<Player> Players { get; set; } = null!;
+    public DbSet<Match> Matches { get; set; } = null!;
+    public DbSet<PlayerMatches> PlayerMatches { get; set; } = null!;
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);
