@@ -1,15 +1,32 @@
+using System.Reflection;
+using FoosLeague.Core.Commands.Players;
+using FoosLeague.Core.Handlers.Players;
+using FoosLeague.Core.Models.XResults;
+using FoosLeague.Data.Contexts;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddRazorPages();
+var writeConnectionString = builder.Configuration.GetConnectionString("WriteConnectionString") ?? throw new InvalidOperationException("Connection string 'WriteConnectionString' not found.");
+builder.Services.AddDbContext<WriteContext>(options => options.UseSqlServer(writeConnectionString));
+var readConnectionString = builder.Configuration.GetConnectionString("ReadConnectionString") ?? throw new InvalidOperationException("Connection string 'ReadConnectionString' not found.");
+builder.Services.AddDbContext<ReadContext.ReadonlyContext>(options => options.UseSqlServer(readConnectionString));
+builder.Services.AddScoped<ReadContext>();
+
+builder.Services.AddRazorPages()
+                .AddRazorRuntimeCompilation();
+
+// HANDLERS
+builder.Services.AddTransient<IRequestHandler<CreatePlayer, XResult<Guid>>, CreatePlayerHandler>();
+
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 

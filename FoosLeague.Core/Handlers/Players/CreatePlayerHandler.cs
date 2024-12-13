@@ -7,7 +7,7 @@ using static FoosLeague.Core.Commands.Players.CreatePlayer;
 
 namespace FoosLeague.Core.Handlers.Players;
 
-public class CreateCompanyHandler(WriteContext context) : IRequestHandler<CreatePlayer, XResult<Guid>>
+public class CreatePlayerHandler(WriteContext context) : IRequestHandler<CreatePlayer, XResult<Guid>>
 {
     private readonly WriteContext context = context ?? throw new ArgumentNullException(nameof(context));
 
