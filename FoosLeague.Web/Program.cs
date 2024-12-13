@@ -1,5 +1,7 @@
 using System.Reflection;
+using FoosLeague.Core.Commands.Matches;
 using FoosLeague.Core.Commands.Players;
+using FoosLeague.Core.Handlers.Matches;
 using FoosLeague.Core.Handlers.Players;
 using FoosLeague.Core.Models.XResults;
 using FoosLeague.Data.Contexts;
@@ -19,6 +21,7 @@ builder.Services.AddRazorPages()
 
 // HANDLERS
 builder.Services.AddTransient<IRequestHandler<CreatePlayer, XResult<Guid>>, CreatePlayerHandler>();
+builder.Services.AddTransient<IRequestHandler<CreateMatch, XResult>, CreateMatchHandler>();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 

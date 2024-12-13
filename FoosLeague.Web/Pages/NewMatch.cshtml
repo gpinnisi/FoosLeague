@@ -1,10 +1,84 @@
 ﻿@page
-@model NewPlayerModel
+@model NewMatchModel
 @{
-    ViewData["Title"] = "New Match";
+    ViewData["Title"] = "Match Registration";
 }
 
 <div class="card text-center p-3">
-    
-
+    <form method="post">
+        <div class="row">
+            <div class="col-md-12">
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                <div class="form-floating mb-3">
+                    <input type="datetime-local" class="form-control datepicker" asp-for="Input.MatchDateTime" placeholder=" " />
+                    <label class="form-label" asp-for="Input.MatchDateTime"></label>
+                    <span asp-validation-for="Input.MatchDateTime" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <div class="form-control mb-3">
+                    <label class="form-floating-label" asp-for="Input.PlayerForwardTeam1" style="color: red">
+                        @Html.DisplayNameFor(model => model.Input.PlayerForwardTeam1)
+                    </label>
+                    <select class="form-select select2" style="width: 100%" asp-for="Input.PlayerForwardTeam1" asp-items="Model.Players"></select>
+                    <span asp-validation-for="Input.PlayerForwardTeam1" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-control mb-3">
+                    <label class="form-floating-label" asp-for="Input.PlayerDefenderTeam1" style="color: red">
+                        @Html.DisplayNameFor(model => model.Input.PlayerDefenderTeam1)
+                    </label>
+                    <select class="form-select select2" style="width: 100%" asp-for="Input.PlayerDefenderTeam1" asp-items="Model.Players"></select>
+                    <span asp-validation-for="Input.PlayerDefenderTeam1" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-control mb-3">
+                    <label class="form-label" asp-for="Input.ScoreTeam1" style="color: red"></label>
+                    <input type="numeric" min="0" max="10" class="form-control datepicker" asp-for="Input.ScoreTeam1" placeholder=" " />
+                    <span asp-validation-for="Input.ScoreTeam1" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-12">
+                <img src="assets/img/biliardino.png" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <div class="form-control mb-3">
+                    <label class="form-floating-label" asp-for="Input.PlayerDefenderTeam2" style="color: blue">
+                        @Html.DisplayNameFor(model => model.Input.PlayerDefenderTeam2)
+                    </label>
+                    <select class="form-select select2" style="width: 100%" asp-for="Input.PlayerDefenderTeam2" asp-items="Model.Players"></select>
+                    <span asp-validation-for="Input.PlayerDefenderTeam2" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-control mb-3">
+                    <label class="form-floating-label" asp-for="Input.PlayerForwardTeam2" style="color: blue">
+                        @Html.DisplayNameFor(model => model.Input.PlayerForwardTeam2)
+                    </label>
+                    <select class="form-select select2" style="width: 100%" asp-for="Input.PlayerForwardTeam2" asp-items="Model.Players"></select>
+                    <span asp-validation-for="Input.PlayerForwardTeam2" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-control mb-3">
+                    <label class="form-label" asp-for="Input.ScoreTeam2" style="color: blue"></label>
+                    <input type="numeric" min="0" max="10" class="form-control datepicker" asp-for="Input.ScoreTeam2" placeholder=" " />
+                    <span asp-validation-for="Input.ScoreTeam2" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <button class="btn btn-primary" type="submit">Register Match</button>
+            </div>
+        </div>
+    </form>
 </div>
