@@ -4,7 +4,7 @@ namespace FoosLeague.Web.Service;
 
 public class EloCalculator
 {
-    private static readonly int K = 500;
+    private static readonly int K = 200;
     // Function to calculate the Probability
     private static double Probability(int rating1, int rating2)
     {
@@ -24,11 +24,8 @@ public class EloCalculator
         var Pa = Probability((int)Team2EloRating, (int)Team1EloRating);
 
         // Update the Elo Ratings
-        var Team1EloRatingResult = Team1EloRating + (Team1EloRating / 2) * (outcome - Pa);
-        var Team2EloRatingResult = Team2EloRating + (Team2EloRating / 2) * ((1 - outcome) - Pb);
-
-        Team1EloRatingResult = outcome == 1 ? Team1EloRatingResult : Team1EloRatingResult * -1;
-        Team2EloRatingResult = outcome == 0 ? Team2EloRatingResult : Team2EloRatingResult * -1;
+        var Team1EloRatingResult = (Team1EloRating + K * (outcome - Pa)) - Team1EloRating + ((outcome == 1 ? 1 : -1) * 10);
+        var Team2EloRatingResult = (Team2EloRating + K * ((1 - outcome) - Pb)) - Team2EloRating + ((outcome == 1 ? -1 : 1) * 10);
 
         return (Convert.ToInt32(Team1EloRatingResult), Convert.ToInt32(Team2EloRatingResult));
     }
